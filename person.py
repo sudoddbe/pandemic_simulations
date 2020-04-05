@@ -1,4 +1,5 @@
 import numpy as np
+from infection import Infection
 
 class Person():
     def __init__(self, world, position = None, target = None, infection = None):
@@ -12,7 +13,7 @@ class Person():
     def get_position(self):
         return self.position
 
-    def update_position(self, speed = 0.1):
+    def update_position(self, speed = 0.01):
         if self.target is None:
             self.position += speed*np.random.randn(*self.position.shape)
         else:
@@ -26,3 +27,11 @@ class Person():
                 self.position += direction*speed
 
         self.position = self.world.clamp_position(self.position)
+
+    def spread_infection(self, other):
+        if self.infection is None or other.recovered or (not other.infection is None):
+            return
+
+        if np.linalg.norm(self.position - other.position) < self.infection.contagious_radius:
+            if np.random.uniform() < self.infection.contagiousness:
+                other.infection = Infection(disease = self.infection.disease)

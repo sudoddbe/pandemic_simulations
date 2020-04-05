@@ -8,11 +8,13 @@ from person import Person
 if __name__=="__main__":
     world = World()
     disease = Disease()
-    persons = [Person(world = world, target = np.array([0.5, 0.5])) for i in range(10)]
+    persons = [Person(world = world, target = world.get_new_target()) for i in range(100)]
+    persons[0].infection = Infection(disease=disease)
     world.setup_live_view()
     plt.show()
-    for time in range(20):
+    for time in range(200):
         world.update_live_view()
         world.update_all_positions()
-        plt.pause(0.1)
+        world.update_infections()
+        plt.pause(0.01)
     world.teardown_live_view()

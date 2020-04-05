@@ -6,5 +6,6 @@ class Infection():
         self.disease = disease
         self.days = 0
         self.showing_symptoms = self.disease.get_showing_symptoms()
-        self.contagious = self.disease.get_contagious(self.showing_symptoms)
-        self.recovery_chance = self.get_recovery_chance()
+        self.contagious_radius = self.disease.get_contagious_radius(self.showing_symptoms)
+        self.contagiousness = self.disease.get_contagiousness(self.showing_symptoms)
+        self.recovery_chance = self.disease.get_base_recovery_chance()

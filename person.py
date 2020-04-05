@@ -1,11 +1,28 @@
+import numpy as np
 
 class Person():
-    def __init__(self, world, position = None, targets = None, infection = None):
+    def __init__(self, world, position = None, target = None, infection = None):
         self.world = world
         self.position = position if not position is None else self.world.get_random_position()
-        self.targets = targets if not targets is None else self.position
+        self.target = target
         self.infection = infection
         self.recovered = False
+        world.population.append(self)
 
     def get_position(self):
         return self.position
+
+    def update_position(self, speed = 0.1):
+        if self.target is None:
+            self.position += speed*np.random.randn(*self.position.shape)
+        else:
+            direction = self.target - self.position
+            norm = np.linalg.norm(direction)
+            if norm < speed:
+                self.position = self.target
+                self.target = self.world.get_new_target()
+            else:
+                direction /= norm
+                self.position += direction*speed
+
+        self.position = self.world.clamp_position(self.position)

@@ -16,5 +16,6 @@ if __name__=="__main__":
         world.update_live_view()
         world.update_all_positions()
         world.update_infections()
+        world.update_recoveries()
         plt.pause(0.01)
     world.teardown_live_view()

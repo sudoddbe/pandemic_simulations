@@ -31,6 +31,10 @@ class World():
                 else:
                     p1.spread_infection(p2)
 
+    def update_recoveries(self):
+        for p in self.population:
+            p.update_recovering()
+
     def setup_live_view(self):
         plt.ion()
         fig = plt.figure()

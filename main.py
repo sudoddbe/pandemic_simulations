@@ -10,14 +10,17 @@ if __name__=="__main__":
     disease = Disease()
     persons = [Person(world = world, target = world.get_new_target()) for i in range(100)]
     persons[0].infection = Infection(disease=disease)
+    persons[1].infection = Infection(disease=disease)
+    persons[2].infection = Infection(disease=disease)
+    persons[3].infection = Infection(disease=disease)
     world.setup_live_view()
     world.update_history()
     plt.show()
-    for time in range(200):
+    for time in range(500):
         world.update_live_view()
         world.update_all_positions()
         world.update_infections()
         world.update_recoveries()
         world.update_history()
-        plt.pause(0.01)
+        plt.pause(0.001)
     world.teardown_live_view()

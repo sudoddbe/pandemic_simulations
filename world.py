@@ -37,7 +37,7 @@ class World():
 
     def update_recoveries(self):
         for p in self.population:
-            p.update_recovering()
+            p.update_infection()
 
     def update_history(self):
         self.nbr_of_infected.append(len(self.get_infected_population()))

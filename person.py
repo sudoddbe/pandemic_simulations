@@ -28,9 +28,10 @@ class Person():
 
         self.position = self.world.clamp_position(self.position)
 
-    def update_recovering(self):
+    def update_infection(self):
         if self.infection is None:
             return
+        self.infection.update_infection()
         if np.random.uniform() < self.infection.recovery_chance:
             self.infection = None
             self.recovered = True

@@ -25,7 +25,8 @@ class World():
 
     def update_all_positions(self):
         for p in self.population:
-            p.update_position()
+            other_people = [op for op in self.population if np.linalg.norm(op.position - p.position) < p.comfort_radius]
+            p.update_position(other_people=other_people)
 
     def update_infections(self):
         for p1 in self.population:
